@@ -780,7 +780,7 @@ export default {
       this.pauseTouch = true;
       setTimeout(() => {
         this.pauseTouch = false;
-      }, Math.abs(this.dragMomentum) * 500);
+      }, Math.abs(this.dragMomentum) * 320);
 
       if (this.rtl) {
         this.offset -= this.dragOffset;
