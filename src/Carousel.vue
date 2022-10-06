@@ -1,7 +1,10 @@
 <template>
   <div
     class="VueCarousel"
-    v-bind:class="{ 'VueCarousel--reverse': paginationPosition === 'top' }"
+    v-bind:class="{
+      'VueCarousel--reverse': paginationPosition === 'top',
+      'pe-none': pauseTouch
+    }"
   >
     <div
       class="VueCarousel-wrapper"
@@ -102,6 +105,7 @@ export default {
       offset: 0,
       refreshRate: 16,
       slideCount: 0,
+      pauseTouch: false,
       transitionstart: "transitionstart",
       transitionend: "transitionend",
       currentHeight: "auto"
@@ -772,6 +776,11 @@ export default {
           : this.slideWidth;
         this.dragOffset = this.dragOffset + Math.sign(deltaX) * (width / 2);
       }
+
+      this.pauseTouch = true;
+      setTimeout(() => {
+        this.pauseTouch = false;
+      }, Math.abs(this.dragMomentum) * 500);
 
       if (this.rtl) {
         this.offset -= this.dragOffset;
